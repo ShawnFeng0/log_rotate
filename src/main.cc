@@ -11,11 +11,16 @@
 #include <CLI11/CLI11.hpp>
 
 int main(int argc, char **argv) {
-  CLI::App app;
+  CLI::App app(
+      "Write the standard input data to the file\n"
+      "\n"
+      "Example: \n"
+      "  your_program | log_rotate --file_path /tmp/example/log.txt "
+      "--file_size=100000 --file_number=3\n");
   app.get_formatter()->column_width(40);
 
   std::string file_path;
-  app.add_option("--file_path", file_path, "File path to record log")
+  app.add_option("--file_path", file_path, "File path to record log, if the directory does not exist it will be created automatically")
       ->required();
 
   int file_size;
